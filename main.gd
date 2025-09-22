@@ -2,8 +2,8 @@ extends Node2D
 
 var http_client = HTTPClient.new()
 var update_headers : Dictionary = {}
-var host = "ggame.hb.ru-msk.vkcloud-storage.ru" #s3 storage bucket url like bucket.hb.ru-msk.vkcloud-storage.ru
-var file_name = "ggame.exe" # Game exe file like game.exe
+var host = "" #s3 storage bucket url like bucket.hb.ru-msk.vkcloud-storage.ru
+var file_name = "" # Game exe file like game.exe
 func pbar(val,maxvall): #For simple manipulate progress bar
 	$CanvasLayer/Control/Panel/LoadingState/ProgressBar.value = val
 	$CanvasLayer/Control/Panel/LoadingState/ProgressBar.max_value = maxvall
