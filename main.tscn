@@ -1,0 +1,99 @@
+[gd_scene load_steps=7 format=3 uid="uid://b4karndftrvnm"]
+
+[ext_resource type="Script" uid="uid://cumpu57t841nu" path="res://main.gd" id="1_0xm2m"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7dm0k"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0xm2m"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
+bg_color = Color(0.764706, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvp3"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lquwl"]
+bg_color = Color(1, 0, 0.203922, 1)
+
+[node name="Launcher" type="Node2D"]
+script = ExtResource("1_0xm2m")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7dm0k")
+
+[node name="top" type="VBoxContainer" parent="CanvasLayer/Control/Panel"]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 12.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Panel/top"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Simple Launcher"
+vertical_alignment = 1
+
+[node name="LoadingState" type="VBoxContainer" parent="CanvasLayer/Control/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = 6.0
+offset_right = 100.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StateText" type="Label" parent="CanvasLayer/Control/Panel/LoadingState"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "%STATE_TEXT%"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/Control/Panel/LoadingState"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_0xm2m")
+theme_override_styles/fill = SubResource("StyleBoxFlat_h2yge")
+value = 50.0
+show_percentage = false
+indeterminate = true
+editor_preview_indeterminate = false
+
+[node name="exit" type="Button" parent="CanvasLayer/Control/Panel"]
+layout_mode = 0
+offset_left = 176.0
+offset_right = 200.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_1bvp3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lquwl")
+text = " X "
+
+[node name="Downloader" type="HTTPRequest" parent="."]
+
+[connection signal="pressed" from="CanvasLayer/Control/Panel/exit" to="." method="_on_exit_pressed"]
+[connection signal="request_completed" from="Downloader" to="." method="_on_checker_request_completed"]
